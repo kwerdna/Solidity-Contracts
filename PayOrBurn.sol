@@ -43,6 +43,6 @@ contract payOrBurn {
 		FundsBurned(_amount);
 	}
 	function burnAddress() constant returns(address) {
-        return 0xdead;   
-    } 
+    	return 0xdead;   
+	} 
 }
