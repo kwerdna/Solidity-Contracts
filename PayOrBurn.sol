@@ -2,7 +2,6 @@ pragma solidity 0.4.8;
 contract payOrBurn {
 	address buyer;
 	address actor;
-	address burnAddress;
 	uint value;
 	string buyerRequest;
 	string actorData;
@@ -18,7 +17,6 @@ contract payOrBurn {
 	function payOrBurn(string _BuyerRequest) payable {
 		buyer = msg.sender;
 		value = msg.value;
-		burnAddress = 0xdead;
 		buyerRequest = _BuyerRequest;
 		RequestPosted(_BuyerRequest);
 	}
@@ -41,7 +39,10 @@ contract payOrBurn {
 		inState(State.ActedOn)
 		condition(_amount <= this.balance)
 	{
-		if (!burnAddress.send(_amount)) throw;
+		if (!burnAddress().send(_amount)) throw;
 		FundsBurned(_amount);
 	}
+	function burnAddress() constant returns(address) {
+        return 0xdead;   
+    } 
 }
