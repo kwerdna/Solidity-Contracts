@@ -6,9 +6,10 @@ contract payOrBurn {
 	uint value;
 	string buyerRequest;
 	string actorData;
-	enum State {Requested, ActedOn, Paid, Burned}
+	enum State {Requested, ActedOn}
 	State state;
 	modifier inState (State s) {if (state != s) throw; _;}
+	modifier condition(bool c) {if (!c) throw; _;  }
 	modifier onlyBuyer() { if (msg.sender != buyer) throw; _;}
 	event RequestPosted (string request);
 	event ActorReplied (string answer);
@@ -27,14 +28,20 @@ contract payOrBurn {
 		ActorReplied(_ActorData);
 		state = State.ActedOn;
 	}
-	function payActor() onlyBuyer inState(State.ActedOn) {
-		if (!actor.send(this.balance)) throw;
-		ActorPaid(value);
-		state = State.Paid;
+	function payActor(uint _amount)
+		onlyBuyer
+		inState(State.ActedOn)
+		condition(_amount <= this.balance)
+	{
+		if (!actor.send(_amount)) throw;
+		ActorPaid(_amount);
 	}
-	function burnFunds() onlyBuyer inState(State.ActedOn) {
-		if (!burnAddress.send(this.balance)) throw;
-		FundsBurned(value);
-		state = State.Burned;
+	function burnFunds(uint _amount)
+		onlyBuyer
+		inState(State.ActedOn)
+		condition(_amount <= this.balance)
+	{
+		if (!burnAddress.send(_amount)) throw;
+		FundsBurned(_amount);
 	}
 }
