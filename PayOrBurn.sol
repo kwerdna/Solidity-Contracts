@@ -2,7 +2,6 @@ pragma solidity 0.4.8;
 contract payOrBurn {
 	address buyer;
 	address actor;
-	uint value;
 	string buyerRequest;
 	string actorData;
 	enum State {Requested, ActedOn}
@@ -16,7 +15,6 @@ contract payOrBurn {
 	event FundsBurned(uint amount);
 	function payOrBurn(string _BuyerRequest) payable {
 		buyer = msg.sender;
-		value = msg.value;
 		buyerRequest = _BuyerRequest;
 		RequestPosted(_BuyerRequest);
 	}
