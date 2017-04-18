@@ -18,6 +18,8 @@ contract Partnership {
     event PaidFunds(address destination, uint amount);
     event OfferCanceled(uint amount);
 
+    function () payable {}
+
     function Partnership(uint _askingPrice) {
         askingPrice = _askingPrice;
         PartnershipOffered(founder, askingPrice);
