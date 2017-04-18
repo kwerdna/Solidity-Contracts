@@ -1,9 +1,14 @@
 pragma solidity 0.4.8;
 contract Partnership {
+    // a founder offers a 50% share in this account for a price
+    // when a partner accepts their payment is sent to the founder
+    // all subsuquent funds removed from the account are split 50/50
+    // either the founder or partner may initiate a withdrawal
+    // the founder may cancel the offer as long as no one has accepted
+
     address founder = msg.sender;
     address partner;
     uint askingPrice;
-    //uint public creationTime = now;
     enum State {Offered, Accepted}
     State state;
 
@@ -52,6 +57,7 @@ contract Partnership {
         if (!founder.send(_amount / 2)) throw;
         PaidFunds(founder, _amount / 2);
     }
+    
     function cancelOffer()
         onlyFounder
         inState(State.Offered)
