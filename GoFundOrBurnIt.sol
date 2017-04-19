@@ -34,10 +34,6 @@ contract goFundOrBurnIt {
         RequestMade(msg.sender, Message, minPledge, minPayment);
     }
 
-    function artistSendMessage(string Message) onlyArtist {
-        ArtistSentMessage(Message);
-    }
-
     function pledgeFunds(string Message)
         payable
         condition(msg.sender != artist)
@@ -47,9 +43,11 @@ contract goFundOrBurnIt {
         FundsPledged(msg.sender, Message, msg.value, funder[msg.sender]);
     }
 
-    function funderSendMessage(string Message)
-        onlyFunder
-    {
+    function artistSendMessage(string Message) onlyArtist {
+        ArtistSentMessage(Message);
+    }
+
+    function funderSendMessage(string Message) onlyFunder {
         FunderSentMessage(msg.sender, Message, funder[msg.sender]);
     }
 
