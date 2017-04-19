@@ -1,7 +1,7 @@
 pragma solidity 0.4.8;
 contract Partnership {
     // a founder offers a 50% share in this account for a price
-    // when a partner accepts their payment is sent to the founder
+    // when a partner accepts, their payment is sent to the founder
     // all subsuquent funds removed from the account are split 50/50
     // either the founder or partner may initiate a withdrawal
     // the founder may cancel the offer as long as no one has accepted
@@ -17,7 +17,7 @@ contract Partnership {
     modifier onlyFounder() { if (msg.sender != founder) throw; _;}
     modifier onlyOwners() { if (msg.sender != founder && msg.sender != partner) throw; _;}
 
-    event PartnershipOffered(address founder, uint _amount);
+    event PartnershipOffered(address founder, uint amount);
     event PartnerJoined(address partner);
     event FundsAdded(address sender, uint amount);
     event PaidFunds(address destination, uint amount);

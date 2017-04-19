@@ -57,8 +57,8 @@ contract goFundOrBurnIt {
         condition(_amount >= minimumPayment)
     {
         funder[msg.sender] -= _amount;
-        if (!artist.send(_amount)) throw;
         ArtistPaid(msg.sender, _amount, Message, funder[msg.sender]);
+        if (!artist.send(_amount)) throw;
     }
 
     function burnFunds(uint _amount, string Message)
@@ -67,7 +67,7 @@ contract goFundOrBurnIt {
         condition(_amount >= minimumPayment)
     {
         funder[msg.sender] -= _amount;
-        if (!burnAddress.send(_amount)) throw;
         FundsBurned(msg.sender, _amount, Message, funder[msg.sender]);
+        if (!burnAddress.send(_amount)) throw;
     }
 }
