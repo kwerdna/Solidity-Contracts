@@ -1,4 +1,4 @@
-// crowdfunded BOP (Burnable Open Payment)
+// crowdfunded BOS (Burnable Open Service)
 // the 'artist' has an idea for a project but needs funding
 // they create a contract which includes a message.
 // min pledge amd min payment/burn amounts are optional.
@@ -9,8 +9,8 @@
 //
 // new
 // the artist stakes ether in the contract which is locked until
-// the artist has been paid, by the funders, an amount >= artistDownPayment * payoutFactor.
-// once this condition is met they artist can withdraw their stake.
+// the artist has been paid an amount >= artistDownPayment * payoutFactor.
+// once this condition is met the artist can withdraw their stake.
 // artistHasStake is set to false when the artist withdraws the down payment.
 // a timeDeadline is set during construction.
 // any funder with a balance >= artistDownPayment may burn the artistDownPayment
