@@ -180,4 +180,12 @@ contract paymentChannel {
         // send eth
         if (!msg.sender.send(_amountSent)) throw;
     }
+
+    function destroyChannel()
+        onlySeller
+        inState(State.Closed)
+        condition(this.balance == 0)
+    {
+        selfdestruct(seller);
+    }
 }
