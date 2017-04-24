@@ -62,6 +62,7 @@ contract paymentChannel {
     event ChannelClosed();
     event BuyerShareCollected(uint AmountWithdrawn);
     event SellerShareCollected(uint AmountWithdrawn);
+    event ShareCollected(uint AmountWithdrawn);
     event FundsAdded(uint AmountAdded);
 
     function paymentChannel(bytes8 _data, uint _firstPayment)
@@ -84,6 +85,7 @@ contract paymentChannel {
     function activateChannel()
         payable
         inState(State.Open)
+        condition(wait == WaitingFor.Buyer)
         condition(msg.sender != seller)
         condition(msg.value >= sellerBalance)
     {
