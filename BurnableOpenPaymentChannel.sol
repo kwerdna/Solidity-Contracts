@@ -171,15 +171,12 @@ contract paymentChannel {
         eitherParty
         inState(State.Closed)
     {
+        // copy this user's balance
         uint _amountSent = (msg.sender == buyer) ? buyerBalance : sellerBalance;
-        if (msg.sender == buyer) {
-            buyerBalance = 0;
-            BuyerShareCollected(_amountSent);
-        }
-        else if (msg.sender == seller) {
-            sellerBalance = 0;
-            SellerShareCollected(_amountSent);
-        }
+        // zero this user's balance
+        (msg.sender == buyer) ? buyerBalance = 0 : sellerBalance = 0;
+        // send eth
+        ShareCollected(_amountSent);
         if (!msg.sender.send(_amountSent)) throw;
     }
 }
