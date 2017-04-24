@@ -171,19 +171,15 @@ contract paymentChannel {
         eitherParty
         inState(State.Closed)
     {
+        uint _amountSent = (msg.sender == buyer) ? buyerBalance : sellerBalance;
         if (msg.sender == buyer) {
-            // tmp var in memory
-            uint _buyerPaid = buyerBalance;
             buyerBalance = 0;
-            if (!msg.sender.send(_buyerPaid)) throw;
-            BuyerShareCollected(_buyerPaid);
+            BuyerShareCollected(_amountSent);
         }
         else if (msg.sender == seller) {
-            // tmp var in memory
-            uint _sellerPaid = sellerBalance;
             sellerBalance = 0;
-            if (!msg.sender.send(_sellerPaid)) throw;
-            SellerShareCollected(_sellerPaid);
+            SellerShareCollected(_amountSent);
         }
+        if (!msg.sender.send(_amountSent)) throw;
     }
 }
