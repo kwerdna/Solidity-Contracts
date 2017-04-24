@@ -60,8 +60,6 @@ contract paymentChannel {
     event PaymentApproved(uint PaymentAmount);
     event PaymentDeclined();
     event ChannelClosed();
-    event BuyerShareCollected(uint AmountWithdrawn);
-    event SellerShareCollected(uint AmountWithdrawn);
     event ShareCollected(uint AmountWithdrawn);
     event FundsAdded(uint AmountAdded);
 
