@@ -138,6 +138,7 @@ contract paymentChannel {
         onlyBuyer
         inState(State.Active)
         condition(wait == WaitingFor.Buyer)
+        condition(nextPayment > 0)
     {
         // tmp var in memory
         uint _amount = nextPayment;
