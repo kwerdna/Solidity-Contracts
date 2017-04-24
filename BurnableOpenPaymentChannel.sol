@@ -17,7 +17,7 @@
 // if the buyer approves a payment request they have the option of continuing
 // the payment channel or closing it.
 // if the buyer declines a payment request the amount of the request is
-// deducted from BOTH parties balances and burned and the channel is closed.
+// deducted from the balance of BOTH parties and burned. the channel is then closed.
 //
 // the seller can cancel a pending payment request.
 //
