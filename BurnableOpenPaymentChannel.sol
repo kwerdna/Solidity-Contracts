@@ -67,7 +67,6 @@ contract paymentChannel {
         payable
     {
         sellerBalance = msg.value;
-        wait = WaitingFor.Buyer;
         nextPayment = _firstPayment;
         ChannelOpened(msg.value);
         PaymentRequested(_data);
