@@ -68,6 +68,7 @@ contract Partnership {
  
     function myPendingBalance()
         onlyOwners
+        inState(State.Accepted)
         returns (uint)
     {
         return pendingWithdrawal[msg.sender];
@@ -75,6 +76,7 @@ contract Partnership {
 
     function withdrawFunds(uint _amount)
         onlyOwners
+        inState(State.Accepted)
         condition(pendingWithdrawal[msg.sender] >= _amount)
     {
         pendingWithdrawal[msg.sender] -= _amount;
